@@ -63,9 +63,6 @@ app.get('/api/rooms', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('socket: ', socket);
-  console.log('New client connected:', socket.id);
-
   // User joins with username and room
   socket.on(
     'join',
