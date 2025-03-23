@@ -76,3 +76,14 @@ test-app/
     │   └── index.ts       # Server entry point
     └── package.json
 ```
+
+## Video
+https://youtu.be/KNN9nuYRbGg
+
+## Things I would have done differently had I had more time
+1. Instead of Context API, I would have used Redux or Zustand because they are more scalable, but in the interest of time, I stuck with Context.
+2. I would add touches to the UI (for instance style the select).
+3. There is a bug I found that I was working to solve regarding the messages.
+4. I would have made the app responsive
+5. I would have used SASS and CSS modules and have the CSS in their own files.
+6. I would have put the types in their own files.
