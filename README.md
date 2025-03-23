@@ -83,7 +83,14 @@ https://youtu.be/KNN9nuYRbGg
 ## Things I would have done differently had I had more time
 1. Instead of Context API, I would have used Redux or Zustand because they are more scalable, but in the interest of time, I stuck with Context.
 2. I would add touches to the UI (for instance style the select).
-3. There is a bug I found that I was working to solve regarding the messages.
+3. There is a bug I found that I was working to solve regarding the messages. I would have fixed this.
 4. I would have made the app responsive
 5. I would have used SASS and CSS modules and have the CSS in their own files.
 6. I would have put the types in their own files.
+7. I would have implemented JWT for more secure authentication.
+8. I would have allowed users to create proper user accounts with passwords.
+9. I would have stored user information in a database.
+10. I would have implemented password hashing
+11. I would have added logout functionality
+
+I had a blast working on this, hope you're having a great weekend!
