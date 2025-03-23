@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
+// Define types
 interface User {
   id: string;
   username: string;
@@ -63,6 +64,9 @@ app.get('/api/rooms', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+  console.log('socket: ', socket);
+  console.log('New client connected:', socket.id);
+
   // User joins with username and room
   socket.on(
     'join',
@@ -154,20 +158,6 @@ io.on('connection', (socket) => {
         })),
       });
 
-      // Broadcast updated room data to all users in the room
-      io.to(room).emit('roomData', {
-        room,
-        users: rooms[room].users.map((user) => ({
-          id: user.id,
-          username: user.username,
-          originalUsername: user.originalUsername,
-        })),
-        messages: rooms[room].messages.map((msg) => ({
-          ...msg,
-          originalUsername: msg.originalUsername || msg.username,
-        })),
-      });
-
       // Send updated room list with correct user counts
       const roomList = Object.keys(rooms).map((roomName) => ({
         name: roomName,
@@ -212,6 +202,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // User leaves
   socket.on('disconnect', () => {
     const index = users.findIndex((user) => user.id === socket.id);
 
@@ -226,6 +217,7 @@ io.on('connection', (socket) => {
         rooms[user.room].users.splice(roomUserIndex, 1);
       }
 
+      // Notify room
       socket.broadcast.to(user.room).emit('message', {
         id: Date.now().toString(),
         text: `${user.username} has left the room`,
@@ -247,7 +239,7 @@ io.on('connection', (socket) => {
       // Remove from global users
       users.splice(index, 1);
 
-      // Send updated room list with user counts
+      // Send updated room list with correct user counts
       const roomList = Object.keys(rooms).map((roomName) => ({
         name: roomName,
         userCount: rooms[roomName].users.length,
